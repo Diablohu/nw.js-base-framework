@@ -41,3 +41,16 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/locales
+/resources
+/credits.html
+/d3dcompiler_46.dll
+/ffmpegsumo.dll
+/icudtl.dat
+/koala-config.json
+/libEGL.dll
+/libGLESv2.dll
+/nw.exe
+/nw.pak
+/nwsnapshot.exe
+/pdf.dll
