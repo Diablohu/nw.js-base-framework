@@ -63,12 +63,26 @@ _frame.app_window = {
 						$html.addClass('window-maxmize')
 					}else{
 						var windowWidth = Math.max(
-											parseInt(_config.get( 'windowWidth' ) || node.gui.App.manifest['window']['width'])
-											,node.gui.App.manifest['window']['min_width']
+											parseInt(
+												_config.get( 'windowWidth' )
+												|| ( global.launcherOptions && global.launcherOptions['window']
+													? global.launcherOptions['window']['width']
+													: node.gui.App.manifest['window']['width'])
+											)
+											,( global.launcherOptions && global.launcherOptions['window']
+												? global.launcherOptions['window']['min_width']
+												: node.gui.App.manifest['window']['min_width'])
 										)
 							,windowHeight = Math.max(
-											parseInt(_config.get( 'windowHeight' ) || node.gui.App.manifest['window']['height'])
-											,node.gui.App.manifest['window']['min_height']
+											parseInt(
+												_config.get( 'windowHeight' )
+												|| ( global.launcherOptions && global.launcherOptions['window']
+													? global.launcherOptions['window']['height']
+													: node.gui.App.manifest['window']['height'])
+											)
+											,( global.launcherOptions && global.launcherOptions['window']
+												? global.launcherOptions['window']['min_height']
+												: node.gui.App.manifest['window']['min_height'])
 										)
 
 						if( !isNaN(windowX) && !isNaN(windowY) ){
