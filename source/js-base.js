@@ -10,7 +10,7 @@
 // @koala-prepend "js/prototype/object.js"
 // @koala-prepend "js/prototype/string.js"
 
-// @koala-prepend "js/parser/urihash.js"
+// @koala-prepend "js/hotkey/_.js"
 
 // @koala-prepend "js/node-webkit/!global.js"
 // @koala-prepend "js/node-webkit/configuration.js"
