@@ -1227,7 +1227,7 @@ _g.init=function(){
 		}
 	});
 
-	_g.parse_urihash.init()
+	//_g.parse_urihash.init()
 
 
 
