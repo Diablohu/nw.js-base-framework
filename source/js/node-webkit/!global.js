@@ -24,8 +24,11 @@ if(typeof debugmode == 'undefined')
 						|| (
 							node.gui.App.manifest['debug']
 							|| node.gui.App.manifest['window']['debug']
-							|| ( global.launcherOptions && (global.launcherOptions['debug'] || global.launcherOptions['window']['debug']) )
 						)
+
+if( global.launcherOptions ){
+	debugmode = global.launcherOptions['debug'] || global.launcherOptions['window']['debug']
+}
 
 
 
