@@ -652,16 +652,16 @@ _g.uriHash=function(name, val, value){
 		,_h = curH ? curH.split('#')[1] : '';
 	_h = _h.split('&');
 
-	if( !_g.uriHashInited ){
+	//if( !_g.uriHashInited ){
 		// 缓存数据
-			_g.uriHashArr={};
-			for( var i in _h ){
-				var h = _h[i].split('=')
-				if(h[0] !== '')
-					_g.uriHashArr[h[0]] = h[1] || false
-			}
-			_g.uriHashInited = true
-	}
+			//_g.uriHashArr={};
+			//for( var i in _h ){
+			//	var h = _h[i].split('=')
+			//	if(h[0] !== '')
+			//		_g.uriHashArr[h[0]] = h[1] || false
+			//}
+	//		_g.uriHashInited = true
+	//}
 	/*
 	_g.uriHashArr={};
 
@@ -1413,7 +1413,7 @@ _g.init=function(){
 			_g.isfocus = false
 		},*/
 		"hashchange._global": function(e){
-			if( !_g.uriHashInited ){
+			//if( !_g.uriHashInited ){
 				// 缓存数据
 					_g.uriHashArr={};
 					var _h = (location.hash ? location.hash.split('#')[1] : '').split('&');
@@ -1422,8 +1422,8 @@ _g.init=function(){
 						if(h[0] !== '')
 							_g.uriHashArr[h[0]] = h[1] || false
 					}
-					_g.uriHashInited = true
-			}
+			//		_g.uriHashInited = true
+			//}
 			// 空hash
 				if( !_g.uriHash() || _g.uriHash() == '' ){
 					e.preventDefault()
