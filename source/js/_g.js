@@ -1535,6 +1535,7 @@ _g.init=function(){
 	}
 
 	// 页面框架处理
+	_hotkey.init()
 	_frame.init_all()
 
 	/*
