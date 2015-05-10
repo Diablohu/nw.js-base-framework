@@ -13,6 +13,9 @@ _p.tip = {
 	size_indicator:			8,
 	//timeout_fade:			null,
 
+	// 文本滤镜，可任意加入滤镜函数
+	filters: [],
+
 	// 隐藏tip延迟时间，毫秒
 	countdown_fade:			250,
 
@@ -145,6 +148,7 @@ _p.tip = {
 	// 格式化tip内容
 	content: function( cont, el ){
 		el = el || _p.tip.el
+		//var contOriginal = cont
 
 		// 替换快捷键，如果存在acgdb-hotkey
 		//if( cont.indexOf('&HOTKEY') != -1 && el.attr('acgdb-hotkey') ){
@@ -303,9 +307,19 @@ _p.el.tip = {
 			return false
 
 		$body.on( 'mouseenter._tip', '[data-tip]', function(){
-				var el = $(this)
+				var el 			= $(this)
+					,cont 		= el.data('tip')
+					,filtered 	= el.data('tip-filtered')
+				if( !filtered ){
+					for( var i in _p.tip.filters )
+						cont = _p.tip.filters[i](cont) || cont
+					el.data({
+						'tip': 				cont,
+						'tip-filtered': 	true
+					})
+				}
 				_p.tip.show(
-					el.data('tip'),
+					cont,
 					el,
 					el.data('tip-position')
 				)
