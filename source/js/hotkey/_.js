@@ -23,10 +23,10 @@ _hotkey.bind( keyCode[, modifier], function[, options] )
 		[optional] STRING || ARRAY modifier
 			Keyboard modifier(s). Array means hotkey will be triggered when holding all the modifer keys.
 			Example:
-				CTRL
-				alt
-				meta
-				[Ctrl, Alt]
+				'CTRL'
+				'alt'
+				'meta'
+				['Meta', 'Alt']
 		FUNCTION function
 			Function to run.
 		[optional] OBJECT options
@@ -51,7 +51,7 @@ _hotkey.bind = function(keyCode, modifier, func, options){
 	modifier = typeof modifier == 'text' ? [modifier] : (modifier || [])
 	options = options || {}
 
-	if( typeof _hotkey.keyCodeBindings[keyCode] )
+	if( typeof _hotkey.keyCodeBindings[keyCode] == 'undefined' )
 		_hotkey.keyCodeBindings[keyCode] = {
 			'default': [],
 			'meta': [],
@@ -63,7 +63,36 @@ _hotkey.bind = function(keyCode, modifier, func, options){
 			'meta+alt+shift': []
 		}
 
-	if( !modifier.length ){
+	var metaKey = false
+		,altKey = false
+		,shiftKey = false
+
+	for( var i in modifier ){
+		modifier[i] = modifier[i].toLowerCase()
+
+		if( modifier[i] == 'ctrl' || modifier[i] == 'meta' )
+			metaKey = true
+		if( modifier[i] == 'alt' )
+			altKey = true
+		if( modifier[i] == 'shift' )
+			shiftKey = true
+	}
+
+	if( metaKey && altKey && shiftKey ){
+		_hotkey.keyCodeBindings[keyCode]['meta+alt+shift'].push( func )
+	}else if( metaKey && altKey ){
+		_hotkey.keyCodeBindings[keyCode]['meta+alt'].push( func )
+	}else if( metaKey && shiftKey ){
+		_hotkey.keyCodeBindings[keyCode]['meta+shift'].push( func )
+	}else if( altKey && shiftKey ){
+		_hotkey.keyCodeBindings[keyCode]['alt+shift'].push( func )
+	}else if( metaKey ){
+		_hotkey.keyCodeBindings[keyCode]['meta'].push( func )
+	}else if( altKey ){
+		_hotkey.keyCodeBindings[keyCode]['alt'].push( func )
+	}else if( shiftKey ){
+		_hotkey.keyCodeBindings[keyCode]['shift'].push( func )
+	}else{
 		_hotkey.keyCodeBindings[keyCode]['default'].push( func )
 	}
 
@@ -83,12 +112,26 @@ _hotkey.init = function(){
 		if( document.activeElement.tagName != 'INPUT'
 			&& document.activeElement.tagName != 'TEXTAREA'
 			&& document.activeElement.tagName != 'SELECT'
-			&& !document.activeElement.hasAttribute('contenteditablea')
+			&& !document.activeElement.hasAttribute('contenteditable')
 			&& _hotkey.allowed
 		){
 			var keyCode = parseInt( e.keyCode || e.which )
 			if( _hotkey.keyCodeBindings[keyCode] ){
-				if( !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey ){
+				if( (e.ctrlKey || e.metaKey) && e.altKey && e.shiftKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['meta+alt+shift'] )
+				}else if( (e.ctrlKey || e.metaKey) && e.altKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['meta+alt'] )
+				}else if( (e.ctrlKey || e.metaKey) && e.shiftKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['meta+shift'] )
+				}else if( e.altKey && e.shiftKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['alt+shift'] )
+				}else if( e.ctrlKey || e.metaKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['meta'] )
+				}else if( e.altKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['alt'] )
+				}else if( e.shiftKey ){
+					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['shift'] )
+				}else if( !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey ){
 					_hotkey._run( _hotkey.keyCodeBindings[keyCode]['default'] )
 				}
 			}
