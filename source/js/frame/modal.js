@@ -24,6 +24,7 @@ _frame.modal = {
 		_frame.modal.hide_timeout = null
 
 		_frame.modal.dom.container.addClass('show')
+		_frame.modal.showing = true
 
 		var settings = $.extend( {}, _frame.modal.defaults, options );
 
@@ -80,9 +81,12 @@ _frame.modal = {
 	},
 
 	hide: function(){
+		if( !_frame.modal.showing )
+			return false
+
 		clearTimeout( _frame.modal.hide_timeout )
 		_frame.modal.hide_timeout = null
-		_frame.modal.dom.container.on({
+		_frame.modal.dom.container.off('transitionend.modal_hide').on({
 										'transitionend.modal_hide': function(e){
 											if( e.currentTarget == e.target && e.originalEvent.propertyName == 'opacity' ){
 												switch( parseInt($(this).css('opacity')) ){
@@ -92,6 +96,7 @@ _frame.modal = {
 															_frame.modal.dom.container
 																.removeClass('show')
 																.off('transitionend.modal_hide')
+															_frame.modal.showing = false
 														}, 10)
 														break;
 												}
@@ -142,6 +147,12 @@ _frame.modal.init = function(){
 			_frame.modal.dom.btn_close = $('<button class="close" />').html('&times;').on('click',function(){_frame.modal.hide()}).appendTo(_frame.modal.dom.box)
 		_frame.modal.dom.bg = $('<s/>').appendTo(_frame.modal.dom.container)
 
+	_hotkey.bind(
+		'27',
+		function(){
+			_frame.modal.hide()
+		}
+	)
 
 
 	_frame.modal.is_init = true
