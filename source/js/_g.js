@@ -149,6 +149,7 @@ var $window 	= $(window)
 		}
 
 		//_p.hashlinks(tar);
+		return tar
 	},
 
 	init_document_ready: function(){
