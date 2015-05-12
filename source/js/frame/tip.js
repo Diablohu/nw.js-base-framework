@@ -307,10 +307,13 @@ _p.el.tip = {
 			return false
 
 		$body.on( 'mouseenter._tip', '[data-tip]', function(){
+				if( $body_preventMouseover )
+					return false
+
 				var el 			= $(this)
 					,cont 		= el.data('tip')
-					,filtered 	= el.data('tip-filtered')
-				if( !filtered ){
+
+				if( !el.data('tip-filtered') ){
 					for( var i in _p.tip.filters )
 						cont = _p.tip.filters[i](cont) || cont
 					el.data({
@@ -318,6 +321,7 @@ _p.el.tip = {
 						'tip-filtered': 	true
 					})
 				}
+
 				_p.tip.show(
 					cont,
 					el,
