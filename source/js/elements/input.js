@@ -1,6 +1,7 @@
 /* Element: Input
 */
 
+/*
 _p.el.input = {
 	index:	0,
 
@@ -138,22 +139,21 @@ _p.el.input = {
 			return true
 		
 		return _g.check_valid( val, tocheck )
-		/*
 
-		switch( el.attr('type') ){
-			case 'email':
-				valid = /^[^\@]+\@[^\@]+\.[a-z]+$/i.test(val)
-				break;
-			case 'url':
-				valid = /^.+\.[a-z]+$/i.test(val)
-				break;
-		}
+		//switch( el.attr('type') ){
+		//	case 'email':
+		//		valid = /^[^\@]+\@[^\@]+\.[a-z]+$/i.test(val)
+		//		break;
+		//	case 'url':
+		//		valid = /^.+\.[a-z]+$/i.test(val)
+		//		break;
+		//}
 		
 		// 正则
-		if( pattern ){
-			pattern = new RegExp(pattern)
-			valid = pattern.test(val)
-		}*/
+		//if( pattern ){
+		//	pattern = new RegExp(pattern)
+		//	valid = pattern.test(val)
+		//}
 
 		return valid
 	},
@@ -359,11 +359,9 @@ _p.el.input = {
 
 
 	type_file: function(el){
-		/*
-			<input id="option_dest" type="text" required />
-			<button type="button" value="Browse...">浏览...</button>
-			<input id="option_dest_selector" type="file" nwdirectory />
-		*/
+		//	<input id="option_dest" type="text" required />
+		//	<button type="button" value="Browse...">浏览...</button>
+		//	<input id="option_dest_selector" type="file" nwdirectory />
 		if( el.prop('nwdirectory') ){
 			var parent 	= el.parent()
 				,text 	= parent.find('input[type="text"]')
@@ -381,3 +379,4 @@ _p.el.input = {
 		}
 	}
 }
+*/
