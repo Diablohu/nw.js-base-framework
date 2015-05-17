@@ -35,7 +35,7 @@ _hotkey.bind( keyCode[, modifier], function[, options] )
 
 
 
-_hotkey = {
+var _hotkey = {
 	allowed: 	true,
 	keyCodeBindings: {}
 }

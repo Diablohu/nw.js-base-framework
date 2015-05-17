@@ -10,6 +10,8 @@
 // @koala-prepend "js/prototype/object.js"
 // @koala-prepend "js/prototype/string.js"
 
+// @koala-prepend "js/templates/_.js"
+
 // @koala-prepend "js/hotkey/_.js"
 
 // @koala-prepend "js/node-webkit/!global.js"
