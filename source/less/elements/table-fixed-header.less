@@ -10,8 +10,16 @@
 		height:		100%;
 		overflow:	auto;
 		thead .th-inner{
-			position:	absolute;
-			top:		0;
+			width:	0;
+			margin:	0 auto;
+			&>span{
+				position:	absolute;
+				top:		0;
+				display:	block;
+				width:		100%;
+				margin-left:-50%;
+				text-align:	center;
+			}
 		}
 		table{
 			width:		100%;
