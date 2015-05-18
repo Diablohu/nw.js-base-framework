@@ -30,6 +30,9 @@ _p.el.links = {
 			$body.on( 'click.link_delegate', 'a', function(e){
 				var el = $(this)
 				_p.el.links.click($(this), e)
+			}).on( 'click.openExternalLink', 'a[href][target="_external"]', function(e){
+				node.gui.Shell.openExternal($(this).attr('href'));
+				e.preventDefault()
 			});
 
 			_p.el.links.is_init = true
