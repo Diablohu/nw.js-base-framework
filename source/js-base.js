@@ -14,6 +14,8 @@
 
 // @koala-prepend "js/hotkey/_.js"
 
+// @koala-prepend "js/form/_.js"
+
 // @koala-prepend "js/node-webkit/!global.js"
 // @koala-prepend "js/node-webkit/configuration.js"
 // @koala-prepend "js/node-webkit/menu.js"
