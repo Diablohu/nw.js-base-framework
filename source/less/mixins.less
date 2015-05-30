@@ -664,23 +664,23 @@
 .flexbox(){
 	// OLD
 	//display: -webkit-box;
-	display: -moz-box;
+	//display: -moz-box;
 //	display: -o-box;
-	display: -ms-flexbox;
-	display: box;
+	//display: -ms-flexbox;
+	//display: box;
 
 	// NEW
 	//display: -webkit-flex;
-	display: -moz-flex;
+	//display: -moz-flex;
 //	display: -o-flex;
-	display: -ms-flex;
+	//display: -ms-flex;
 	display: flex;
 }
 .flex( @value ){
 	// OLD
-	        box-flex: @value;
+	//        box-flex: @value;
 	//-webkit-box-flex: @value;
-	   -moz-box-flex: @value;
+	//   -moz-box-flex: @value;
 	   // -ms-box-flex: @value;
 //	     -o-box-flex: @value;
 
@@ -688,85 +688,85 @@
 	        flex: @value;
 	//-webkit-flex: @value;
 	  // -moz-flex: @value;
-	    -ms-flex: @value;
+	//    -ms-flex: @value;
 //	     -o-flex: @value;
 }
 .flex-flow( @value ){
 	        flex-flow: @value;
 	//-webkit-flex-flow: @value;
-	   -moz-flex-flow: @value;
-	    -ms-flex-flow: @value;
+	//   -moz-flex-flow: @value;
+	//    -ms-flex-flow: @value;
 //	     -o-flex-flow: @value;
 }
 .flex-direction( @value ){
 	        flex-direction: @value;
 	//-webkit-flex-direction: @value;
-	   -moz-flex-direction: @value;
-	    -ms-flex-direction: @value;
+	//   -moz-flex-direction: @value;
+	//    -ms-flex-direction: @value;
 //	     -o-flex-direction: @value;
 }
 .flex-grow( @value ){
 	@val:  unit((@value * @base_multiper),rem);
 	        flex-grow: @val;
 	//-webkit-flex-grow: @val;
-	   -moz-flex-grow: @val;
-	    -ms-flex-grow: @val;
+	//   -moz-flex-grow: @val;
+	//    -ms-flex-grow: @val;
 //	     -o-flex-grow: @val;
 }
 .flex-basis( @value ){
 	@val:  unit((@value * @base_multiper),rem);
 	        flex-basis: @val;
 	//-webkit-flex-basis: @val;
-	   -moz-flex-basis: @val;
-	    -ms-flex-basis: @val;
+	//   -moz-flex-basis: @val;
+	//    -ms-flex-basis: @val;
 //	     -o-flex-basis: @val;
 }
 .justify-content( @value ){
 	//.box-pack(@value);
 	        justify-content: @value;
-	-webkit-justify-content: @value;
-	   -moz-justify-content: @value;
-	    -ms-justify-content: @value;
+	//-webkit-justify-content: @value;
+	//   -moz-justify-content: @value;
+	//    -ms-justify-content: @value;
 //	     -o-justify-content: @value;
 }
 .align-items( @value ){
 	//.box-align(@value);
 	        align-items: @value;
 	//-webkit-align-items: @value;
-	   -moz-align-items: @value;
-	    -ms-align-items: @value;
+	//   -moz-align-items: @value;
+	//    -ms-align-items: @value;
 //	     -o-align-items: @value;
 }
 .align-content( @value ){
 	        align-content: @value;
 	//-webkit-align-content: @value;
-	   -moz-align-content: @value;
-	    -ms-align-content: @value;
+	//   -moz-align-content: @value;
+	//    -ms-align-content: @value;
 //	     -o-align-content: @value;
 }
 .align-self( @value ){
 	        align-self: @value;
 	//-webkit-align-self: @value;
-	   -moz-align-self: @value;
-	    -ms-align-self: @value;
+	//   -moz-align-self: @value;
+	//    -ms-align-self: @value;
 //	     -o-align-self: @value;
 }
 
 // below are old flex
 .box-pack( @value ){
 	        box-pack: @value;
-	-webkit-box-pack: @value;
-	   -moz-box-pack: @value;
-	    -ms-flex-pack: @value;
-	    -ms-box-pack: @value;
+	//-webkit-box-pack: @value;
+	//   -moz-box-pack: @value;
+	//    -ms-flex-pack: @value;
+	//    -ms-box-pack: @value;
 //	     -o-box-pack: @value;
 }
 .box-align( @value ){
 	        box-align: @value;
-	-webkit-box-align: @value;
-	   -moz-box-align: @value;
-	    -ms-flex-align: @value;
-	    -ms-box-align: @value;
+	//-webkit-box-align: @value;
+	//   -moz-box-align: @value;
+	//    -ms-flex-align: @value;
+	//    -ms-box-align: @value;
 //	     -o-box-align: @value;
 }
 

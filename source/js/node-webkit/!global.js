@@ -55,11 +55,12 @@ if( global.launcherOptions ){
 					.on('change', function(){
 						var input = _frame.dom.hidden_saveform
 							,dest = input.val()
-						input.attr('nwsaveas', '').val('')
+							,path_file = input.attr('nwsaveas_file')
+						input.attr('nwsaveas', '').attr('nwsaveas_file', '').val('')
 
 						if( dest ){
 							var cbCalled = false
-								,rd = node.fs.createReadStream( path_src )
+								,rd = node.fs.createReadStream( path_file )
 							rd.on("error", function(err) {
 								done(err);
 							});
@@ -81,8 +82,8 @@ if( global.launcherOptions ){
 					})
 					.appendTo( _frame.dom.hidden )
 		_frame.dom.hidden_saveform
-			.attr(
-				'nwsaveas',
-				filename || ''
-			).trigger('click')
+			.attr({
+				'nwsaveas': 	filename || '',
+				'nwsaveas_file':path_src
+			}).trigger('click')
 	}
