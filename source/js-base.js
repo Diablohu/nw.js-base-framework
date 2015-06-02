@@ -22,6 +22,7 @@
 // @koala-prepend "js/node-webkit/window.js"
 
 // @koala-prepend "js/frame/_global.js"
+// @koala-prepend "js/frame/menu.js"
 // @koala-prepend "js/frame/modal.js"
 // @koala-prepend "js/frame/tip.js"
 
