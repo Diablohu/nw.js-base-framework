@@ -46,6 +46,13 @@ if( global.launcherOptions ){
 		}
 
 
+// _g.execPath
+	_g.execPath = node.path.dirname(process.execPath).split(node.path.sep)
+	_g.execPath = (process.platform == 'darwin' || (_g.execPath[_g.execPath.length - 1] == 'nwjs' && node.path.basename( process.execPath ) == 'nw.exe') )
+					? process.cwd()
+					: node.path.dirname(process.execPath)
+
+
 
 // 文件另存为
 	_g.file_save_as = function( path_src, filename ){
