@@ -29,11 +29,22 @@ _p.el.links = {
 		if( !_p.el.links.is_init ){			
 			$body.on( 'click.link_delegate', 'a', function(e){
 				var el = $(this)
+					,target = el.attr('target')
+
+				if( this.hostname != window.location.hostname )
+					target = '_external'
+
+				if( target == '_external' || target == '_blank' ){
+					node.gui.Shell.openExternal($(this).attr('href'));
+					e.preventDefault()
+					return true
+				}
+
 				_p.el.links.click($(this), e)
-			}).on( 'click.openExternalLink', 'a[href][target="_external"]', function(e){
-				node.gui.Shell.openExternal($(this).attr('href'));
-				e.preventDefault()
-			});
+			})//.on( 'click.openExternalLink', 'a[href][target="_external"]', function(e){
+			//	node.gui.Shell.openExternal($(this).attr('href'));
+			//	e.preventDefault()
+			//});
 
 			_p.el.links.is_init = true
 		}
