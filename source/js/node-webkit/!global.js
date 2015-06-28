@@ -94,3 +94,11 @@ if( global.launcherOptions ){
 				'nwsaveas_file':path_src
 			}).trigger('click')
 	}
+
+
+// Set actual page zoom, 1 = 100%, 0.5 = 50%, 2 = 200%, etc...
+	_g.zoom = function(v){
+		v = v || 1
+		node.win.zoomLevel = Math.log(v) / Math.log(1.2)
+		return node.win.zoomLevel
+	}
