@@ -38,6 +38,9 @@ _p.el.flexgrid = {
 
 jQuery.fn.extend({
 	appendDOM: function( el_to_append ){
+		if( typeof el_to_append == 'function' )
+			el_to_append = el_to_append()
+			
 		if( el_to_append )
 			el_to_append.insertBefore( this.data('append_before_this') )
 		return this
