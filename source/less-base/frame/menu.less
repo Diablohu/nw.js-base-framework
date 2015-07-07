@@ -28,6 +28,7 @@ body > .menus{
 		max-width:		100%;
 		max-height:		100%;
 		transform:		translateY(-10px);
+		.border(1, solid, rgba(255, 255, 255, .3));
 
 		&.on{
 			opacity:	1;
@@ -39,10 +40,9 @@ body > .menus{
 
 		&.show{
 			display:	block;
-			.border(1, solid, rgba(255, 255, 255, .3));
 			box-shadow: 0 0 20px rgba(0, 0, 0, .35);
 			&>.blured{
-				-webkit-filter:	~"blur(5px)";
+				-webkit-filter:	~"blur(7.5px)";
 			}
 		}
 
@@ -52,7 +52,7 @@ body > .menus{
 			max-width:	100%;
 			max-height:	100%;
 			overflow:	auto;
-			background:	rgba(0, 0, 0, .25);
+			background:	rgba(0, 0, 0, .4);
 			/*
 			&:before{
 				z-index:	100;
