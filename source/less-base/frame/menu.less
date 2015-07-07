@@ -6,6 +6,7 @@ body > .menus{
 	left:		0;
 	z-index:	-100;
 	overflow:	hidden;
+
 	&.on{
 		z-index:	@z_menu
 	}
@@ -35,10 +36,13 @@ body > .menus{
 				transform:	translateY(0);
 			}
 		}
+
 		&.show{
 			display:	block;
+			.border(1, solid, rgba(255, 255, 255, .3));
+			box-shadow: 0 0 20px rgba(0, 0, 0, .35);
 			&>.blured{
-				-webkit-filter:	~"blur(10px)";
+				-webkit-filter:	~"blur(5px)";
 			}
 		}
 
@@ -49,6 +53,7 @@ body > .menus{
 			max-height:	100%;
 			overflow:	auto;
 			background:	rgba(0, 0, 0, .25);
+			/*
 			&:before{
 				z-index:	100;
 				content:	"";
@@ -62,6 +67,7 @@ body > .menus{
 				box-shadow:	inset 0 0 5px rgba(255, 255, 255, .75),
 							inset 0 0 10px rgba(255, 255, 255, .5);
 			}
+			*/
 			menuitem, .menuitem{
 				display:	block;
 				.line-height(40);
