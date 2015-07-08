@@ -41,7 +41,7 @@ _menu.prototype.init = function(){
 			'transitionend.menu_hide': function(e){
 				if( e.currentTarget == e.target
 					&& e.originalEvent.propertyName == 'opacity'
-					&& parseInt(self.dom.menu.css('opacity')) === 0
+					&& parseFloat(self.dom.menu.css('opacity')) === 0
 				){
 					_g.log(e)
 					_g.log(self.dom.menu.css('opacity'))
