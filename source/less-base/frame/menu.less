@@ -117,16 +117,20 @@ body > .menus{
 		}
 		
 		&.mod-checkbox{
-			menuitem{
-				position: 	relative;
-				.padding-left(40);
-				input[type=checkbox]{
-					position: 	absolute;
-					.top(10);
-					.left(10);
-				}
-				label{
-					display: 	block;
+			&>.body{
+				menuitem{
+					position: 	relative;
+					padding: 	0;
+					input[type=checkbox]{
+						position: 	absolute;
+						.top(10);
+						.left(10);
+					}
+					label{
+						display: 	block;
+						.padding-left(40);
+						padding-right: 1.5em;
+					}
 				}
 			}
 		}
