@@ -32,8 +32,8 @@ node.openWin = function( path, options ){
 
 
 
-node.win.on('loaded', function(){
-})
+//node.win.on('loaded', function(){
+//})
 
 
 
