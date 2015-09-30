@@ -126,12 +126,15 @@ _frame.modal.init = function(){
 
 	_frame.modal.dom.container = $('<div class="container modal" />').on({
 										'transitionend.modal_hide': function(e){
-											if( _frame.modal.showing && e.currentTarget == e.target && e.originalEvent.propertyName == 'opacity' && parseFloat($(this).css('opacity')) == 0 ){
+											if( _frame.modal.showing
+												&& e.currentTarget == e.target
+												&& e.originalEvent.propertyName == 'opacity'
+												&& parseFloat($(this).css('opacity')) <= 0
+											){
 												_frame.modal.hide_timeout = setTimeout(function(){
 													_frame.modal.reset()
-													_frame.modal.dom.container
-														.removeClass('show')
-														.off('transitionend.modal_hide')
+													_frame.modal.dom.container.removeClass('show')
+														//.off('transitionend.modal_hide')
 													_frame.modal.showing = false
 												}, 10)
 											}
