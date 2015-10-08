@@ -47,4 +47,4 @@ $document.ready(function(){
 	if( t > 5000 || bMobile ){
 		$html.addClass('no-transition')
 	}
-})
+});

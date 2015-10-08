@@ -86,12 +86,14 @@ _p.tip = {
 		_p.tip.init_global();
 
 		if( !_p.tip.dom.hasClass('show') ){
-			node.win.capturePage(function(datauri){
-				_p.tip.dom_bluredbg.css(
-					'background-image',
-					'url('+datauri+')'
-				)
-			}, 'jpg', 'datauri')
+			if( typeof node != 'undefined' ){
+				node.win.capturePage(function(datauri){
+					_p.tip.dom_bluredbg.css(
+						'background-image',
+						'url('+datauri+')'
+					)
+				}, 'jpg', 'datauri')
+			}
 			_p.tip.dom.addClass('show')
 		}
 
