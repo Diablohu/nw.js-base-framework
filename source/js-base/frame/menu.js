@@ -123,7 +123,7 @@ _menu.prototype.show = function( targetEl, mouseX, mouseY ){
 		})
 
 	// 虚化背景
-		if( this.settings.showBlured ){
+		if( this.settings.showBlured && typeof node != 'undefined' ){
 			node.win.capturePage(this.capturePage_callback.bind(this), 'jpg', 'datauri')
 		}else{
 			this.dom.menu.addClass('on')
