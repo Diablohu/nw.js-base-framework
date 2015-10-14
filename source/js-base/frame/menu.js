@@ -41,7 +41,8 @@ _menu.prototype.init = function(){
 	
 	// 绑定transitionend事件，自动触发隐藏函数
 		this.dom.menu.on({
-			'transitionend.menu_hide': function(e){
+			//'transitionend.menu_hide': function(e){
+			'transitionend.menu_hide webkitTransitionEnd.menu_hide mozTransitionEnd.menu_hide': function(e){
 				if( e.currentTarget == e.target
 					&& e.originalEvent.propertyName == 'opacity'
 					&& parseFloat(self.dom.menu.css('opacity')) === 0

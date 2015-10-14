@@ -125,7 +125,8 @@ _frame.modal.init = function(){
 		return true
 
 	_frame.modal.dom.container = $('<div class="modal" />').on({
-										'transitionend.modal_hide': function(e){
+										//'transitionend.modal_hide': function(e){
+										'transitionend.modal_hide webkitTransitionEnd.modal_hide mozTransitionEnd.modal_hide': function(e){
 											if( _frame.modal.showing
 												&& e.currentTarget == e.target
 												&& e.originalEvent.propertyName == 'opacity'
