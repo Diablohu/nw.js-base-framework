@@ -124,7 +124,7 @@ _frame.modal.init = function(){
 	if( _frame.modal.is_init )
 		return true
 
-	_frame.modal.dom.container = $('<div class="container modal" />').on({
+	_frame.modal.dom.container = $('<div class="modal" />').on({
 										'transitionend.modal_hide': function(e){
 											if( _frame.modal.showing
 												&& e.currentTarget == e.target
