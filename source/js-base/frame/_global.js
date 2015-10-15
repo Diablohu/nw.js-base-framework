@@ -4,6 +4,9 @@
 
 
 _frame.dom = {}
+_frame.main = {
+	'last': {}
+}
 
 
 
