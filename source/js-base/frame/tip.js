@@ -296,6 +296,31 @@ _p.tip = {
 			'data-tip-indicator-offset-y': (y - ny)+'px'
 		})
 		return pos
+	},
+	
+	trigger_by_el: function(el){
+		var cont 		= el.data('tip')
+
+		if( !el.data('tip-filtered') ){
+			_p.tip.filters.forEach(function(filter){
+				cont = filter(cont) || cont
+			})
+			el.data({
+				'tip': 				cont,
+				'tip-filtered': 	true
+			})
+		}
+
+		//_p.tip.el_pending = el
+		
+		//setTimeout(function(){
+		//	if( _p.tip.el_pending == el )
+				_p.tip.show(
+					cont,
+					el,
+					el.data('tip-position')
+				)
+		//}, 100)
 	}
 };
 
@@ -311,38 +336,20 @@ _p.el.tip = {
 			return false
 
 		$body.on( 'mouseenter._tip', '[data-tip]', function(){
-				if( $body_preventMouseover )
-					return false
-
-				var el 			= $(this)
-					,cont 		= el.data('tip')
-
-				if( !el.data('tip-filtered') ){
-					_p.tip.filters.forEach(function(filter){
-						cont = filter(cont) || cont
-					})
-					el.data({
-						'tip': 				cont,
-						'tip-filtered': 	true
-					})
-				}
-
-				//_p.tip.el_pending = el
-				
-				//setTimeout(function(){
-				//	if( _p.tip.el_pending == el )
-						_p.tip.show(
-							cont,
-							el,
-							el.data('tip-position')
-						)
-				//}, 100)
+				if( !$body_preventMouseover )
+					_p.tip.trigger_by_el($(this))
 			})
 			.on( 'mouseleave._tip', '[data-tip]', function(){
 				_p.tip.hide()
 			})
 			.on( 'click._tip', '[data-tip]', function(){
 				_p.tip.hide(true)
+			})
+			.on( 'tipshow._tip', '[data-tip]', function(){
+				_p.tip.trigger_by_el($(this))
+			})
+			.on( 'tiphide._tip', '[data-tip]', function(){
+				_p.tip.hide()
 			})
 
 		_p.el.tip.isInit = true
