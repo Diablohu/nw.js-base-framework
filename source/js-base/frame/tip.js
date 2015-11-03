@@ -299,16 +299,13 @@ _p.tip = {
 	},
 	
 	trigger_by_el: function(el){
-		var cont 		= el.data('tip')
+		var cont 		= el.attr('data-tip')
 
 		if( !el.data('tip-filtered') ){
 			_p.tip.filters.forEach(function(filter){
 				cont = filter(cont) || cont
 			})
-			el.data({
-				'tip': 				cont,
-				'tip-filtered': 	true
-			})
+			el.data('tip-filtered', true)
 		}
 
 		//_p.tip.el_pending = el
@@ -318,7 +315,7 @@ _p.tip = {
 				_p.tip.show(
 					cont,
 					el,
-					el.data('tip-position')
+					el.attr('data-tip-position')
 				)
 		//}, 100)
 	}
