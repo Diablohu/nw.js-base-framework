@@ -135,6 +135,9 @@ _menu.prototype.hide = function(){
 	if( !this.showing )
 		return false
 
+	if( !this.dom.menu.hasClass('on') )
+		this.hideTrue()
+
 	// removeClass: on
 		this.dom.menu.removeClass('on')
 }
@@ -170,6 +173,16 @@ _menu.prototype.capturePage_callback = function( datauri ){
 	}
 }
 
+_menu.hideAll = function(ms){
+	_frame.menu.timeout_hideall = setTimeout(function(){
+		for(var i in _frame.menu.menus){
+			if( _frame.menu.menus[i].hide )
+				_frame.menu.menus[i].hide()
+		}
+		_frame.menu.timeout_hideall = null
+	}, ms || 1)
+}
+
 
 
 
@@ -190,13 +203,7 @@ _frame.menu = {
 			this.dom.container = $('<div class="menus"/>')
 				.on({
 					'click': function(e, ms){
-						_frame.menu.timeout_hideall = setTimeout(function(){
-							for(var i in _frame.menu.menus){
-								if( _frame.menu.menus[i].hide )
-									_frame.menu.menus[i].hide()
-							}
-							_frame.menu.timeout_hideall = null
-						}, ms || 1)
+						_menu.hideAll(ms)
 					},
 					'contextmenu': function(){
 						_frame.menu.dom.container.trigger('click')
