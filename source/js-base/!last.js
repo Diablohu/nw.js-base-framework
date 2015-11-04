@@ -2,7 +2,7 @@ $document.ready(function(){
 
 	//var timeStart = _g.timeNow()
 
-	//$body 		= $('body')
+	$body 		= $('body')
 
 	// 延迟一段时间，保存正确的基础字号信息
 	//setTimeout(function(){
