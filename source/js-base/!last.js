@@ -1,8 +1,8 @@
 $document.ready(function(){
 
-	var timeStart = _g.timeNow()
+	//var timeStart = _g.timeNow()
 
-	$body 		= $('body')
+	//$body 		= $('body')
 
 	// 延迟一段时间，保存正确的基础字号信息
 	//setTimeout(function(){
@@ -37,14 +37,15 @@ $document.ready(function(){
 			$(window).resize();
 	}, _g.animate_duration_delay)*/
 
-	var timeEnd = _g.timeNow()
-		,t = timeEnd - timeStart
+	//var timeEnd = _g.timeNow()
+	//	,t = timeEnd - timeStart
 
 	//console.log(
 	//	'time initializing: '+ (timeEnd - timeStart) +'ms'
 	//)
 
-	if( t > 5000 || bMobile ){
-		$html.addClass('no-transition')
-	}
+	//if( t > 5000 ){
+	//if( t > 5000 || bMobile ){
+	//	$html.addClass('no-transition')
+	//}
 });
