@@ -3,15 +3,20 @@
 		display:	none;
 		.checked_class(@n, @i: 1) when (@i =< @n) {
 			//&:nth-child(@{n}):checked~.tabview-content:nth-child(@{n}){
-			&[value="@{i}"]:checked~section:nth-of-type(@{i}){
+			/*
+			&[value="@{i}"]:checked ~ section:nth-of-type(@{i}){
 				display:	block;
 			}
-			.checked_class(@n, (@i + 1))
+			*/
+			&[value="@{i}"]:checked ~ section:not(:nth-of-type(@{i})){
+				display:	none !important;
+			}
+			.checked_class(@n, (@i + 1));
 		}
-		.checked_class(50);
+		.checked_class(30);
 	}
 	&>section{
-		display:	none;
+		//display:	none;
 		.fadein()
 	}
 }
