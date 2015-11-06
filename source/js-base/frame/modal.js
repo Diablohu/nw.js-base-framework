@@ -52,7 +52,7 @@ _frame.modal = {
 		})
 
 		if( settings.showBlured ){
-			if( !_frame.modal.dom.blured )
+			if( !_frame.modal.dom.blured && typeof node != 'undefined' )
 				node.win.capturePage(function(datauri){
 					//_frame.modal.dom.blured = $('<img/>').attr('src', datauri).appendTo(_frame.modal.dom.container)
 					//_frame.modal.dom.blured = $('<s/>').css('background-image', 'url('+datauri+')').appendTo(_frame.modal.dom.container)
