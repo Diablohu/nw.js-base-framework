@@ -11,9 +11,8 @@
 	top:			-1000px;
 	left:			-1000px;
 	color:			#f2f2f2;
-	background:		#333;
-	//background:		rgba(0, 0, 0, .85);
-	background:		rgba(0, 0, 0, .5);
+	background:		@color_overlay_bg;
+	background:		@color_overlay_bg_alpha;
 	//.border(1, solid, rgba(255, 255, 255, .3));
 	line-height:	150%;
 	.font-size(14);
@@ -28,7 +27,6 @@
 		display:	block;
 		position:	relative;
 		z-index:	1;
-		background:	rgba(0, 0, 0, .4);
 		.border(1, solid, @tooltip_border_color);
 		.padding(4, 6);
 		//overflow:	auto;
@@ -70,8 +68,19 @@
 	}
 	*/
 
+	&.mod-blur-backdrop,
+	&.mod-blur-shot{
+		background:		@color_overlay_bg_mod_blur;
+		&>.body{
+			background:	@color_overlay_bg_mod_blur2;
+		}
+	}
+
 	&.on{
 		opacity:	1;
+		&.mod-blur-backdrop{
+			backdrop-filter: 	~"blur(7.5px)";
+		}
 	}
 	&.show{
 		display:	block;
