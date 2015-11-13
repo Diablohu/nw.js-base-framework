@@ -53,22 +53,30 @@ _menu.prototype.init = function(){
 		})
 	
 	// 创建全部菜单项目
-		for(var i in this.settings.items){
-			var menuitem = self.settings.items[i]
-			switch( menuitem ){
-				case 'separator':
-					menuitem = $('<hr/>')
-					break;
+		for(var i = 0, menuitem; menuitem = this.settings.items[i] ; i++){
+			if( menuitem ){
+				switch( menuitem ){
+					case 'separator':
+						menuitem = $('<hr/>')
+						break;
+				}
+				if( menuitem.hasClass('donot_hide') ){
+					menuitem.on('click', function(){
+						setTimeout(function(){
+							clearTimeout(self.timeout_hideself)
+							self.timeout_hideself = null
+						}, 1)
+					})
+				}
+				self.appendItem( menuitem )
 			}
-			if( menuitem.hasClass('donot_hide') ){
-				menuitem.on('click', function(){
-					setTimeout(function(){
-						clearTimeout(self.timeout_hideself)
-						self.timeout_hideself = null
-					}, 1)
-				})
-			}
-			self.appendItem( menuitem )
+		}
+
+	// 虚化背景
+		if( this.settings.showBlured && _huCss.csscheck_full('backdrop-filter') ){
+			this.dom.menu.addClass('mod-blur-backdrop')
+		}else if( this.settings.showBlured && typeof node != 'undefined' ){
+			this.dom.menu.addClass('mod-blur-shot')
 		}
 
 	_frame.menu.menus.push(this)
@@ -167,7 +175,7 @@ _menu.prototype.appendItem = function(item){
 }
 
 _menu.prototype.capturePage_callback = function( datauri ){
-	console.log(this)
+	//console.log(this)
 	if( this.showing ){
 		this.dom.blured = $('<s class="blured"/>').css('background-image', 'url('+datauri+')').appendTo( this.dom.menu.addClass('on') )
 	}

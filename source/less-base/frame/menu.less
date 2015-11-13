@@ -16,8 +16,8 @@ body > .menus{
 		display:		none;
 		top:			-1000px;
 		left:			-1000px;
-		background:		#888;
-		background:		rgba(0, 0, 0, .5);
+		background:		#222;
+		background:		rgba(32, 32, 32, .8);
 		line-height:	150%;
 		.font-size(14);
 		opacity:		0;
@@ -30,23 +30,6 @@ body > .menus{
 		transform:		translateY(-10px);
 		.border(1, solid, rgba(255, 255, 255, .3));
 
-		&.on{
-			opacity:	1;
-			transform:	translateY(0);
-			&>.blured{
-				transform:	translateY(0);
-			}
-		}
-
-		&.show{
-			display:	block;
-			box-shadow: 0 0 20px rgba(0, 0, 0, .35);
-			will-change:opacity;
-			&>.blured{
-				-webkit-filter:	~"blur(7.5px)";
-			}
-		}
-
 		&>.body{
 			position:	relative;
 			z-index:	2;
@@ -54,7 +37,6 @@ body > .menus{
 			max-height:	100%;
 			overflow:	auto;
 			-webkit-overflow-scrolling: touch;
-			background:	rgba(0, 0, 0, .4);
 			/*
 			&:before{
 				z-index:	100;
@@ -100,6 +82,34 @@ body > .menus{
 				border: 	0 solid transparent;
 				.border-top(1, solid, rgba(255,255,255,.2));
 				margin: 	8px 0;
+			}
+		}
+
+		&.mod-blur-backdrop,
+		&.mod-blur-shot{
+			background:		rgba(0, 0, 0, .5);
+			&>.body{
+				background:	rgba(0, 0, 0, .4);
+			}
+		}
+
+		&.on{
+			opacity:	1;
+			transform:	translateY(0);
+			&>.blured{
+				transform:	translateY(0);
+			}
+			&.mod-blur-backdrop{
+				backdrop-filter: 	~"blur(7.5px)";
+			}
+		}
+
+		&.show{
+			display:	block;
+			box-shadow: 0 0 20px rgba(0, 0, 0, .35);
+			will-change:opacity;
+			&>.blured{
+				-webkit-filter:	~"blur(7.5px)";
 			}
 		}
 
