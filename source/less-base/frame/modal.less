@@ -24,6 +24,7 @@ body > .modal{
 		width:		75%;
 		height:		75%;
 		z-index: 	5;
+		background: rgba(16, 16, 16, .8);
 		//box-shadow:	0 0 20px rgba(0,0,0,.25);
 		.border-radius(5);
 		//overflow:	hidden;
@@ -87,11 +88,14 @@ body > .modal{
 		//background:	no-repeat 50% 50% / cover;
 		.fadein();
 		//background-color:	lighten(#000, 65%);
-		background: rgba(16, 16, 16, .85);
+		background: rgba(16, 16, 16, .25);
 	}
 
 	&.mod-blur-backdrop,
 	&.mod-blur-shot{
+		&>div{
+			background: 	transparent;
+		}
 		&>s{
 			background:		transparent;
 			//box-shadow: 	inset 0 0 50px 25px lighten(#000, 65%);
