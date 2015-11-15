@@ -6,25 +6,6 @@ _p.el.table = {
 	// is_init: false,
 
 
-	/*
-	hover_column_getTable: function( td ){
-		function _check( el ){
-			if( el[0].tagName.toLowerCase() == 'table' )
-				return el
-			
-			return _check( el.parent() )
-		}
-		return _check( td.parent() )
-	},
-	hover_column_getTr: function( td ){
-		function _check( el ){
-			if( el[0].tagName.toLowerCase() == 'tr' )
-				return el
-			
-			return _check( el.parent() )
-		}
-		return _check( td.parent() )
-	},*/
 	hover_column_getTable: function( path ){
 		function _check( index ){
 			if( path[index].tagName.toLowerCase() == 'table' )
@@ -43,6 +24,27 @@ _p.el.table = {
 		}
 		return _check( 0 )
 	},
+	/*
+	hover_column_getTable_alt: function( td ){
+		function _check( el ){
+			if( el[0].tagName.toLowerCase() == 'table' )
+				return el
+			
+			return _check( el.parent() )
+		}
+		return _check( td.parent() )
+	},
+	hover_column_getTr_alt: function( td ){
+		function _check( el ){
+			if( el[0].tagName.toLowerCase() == 'tr' )
+				return el
+			
+			return _check( el.parent() )
+		}
+		return _check( td.parent() )
+	},
+	*/
+	
 	hover_column_mouseenter: function( table, td_index ){
 		table//.attr( 'td-nth-hovered', parseInt(td_index) + 1 )
 			.find('tbody tr td:nth-of-type(' + ( parseInt(td_index) + 1 ) + ')').addClass('state-hover-column')
@@ -91,16 +93,29 @@ _p.el.table = {
 			})
 			*/
 			$html.on('mouseenter.tablehover-column', 'body.hover table.hashover-column tbody td', function(e){
-				var path = e.originalEvent.path
-					,td = $(this).on('mouseleave.tablehover-column', function(){
-							_p.el.table.hover_column_mouseleave( table, index )
-							td.off('mouseleave.tablehover-column')
-						})
-					,table = _p.el.table.hover_column_getTable( path )
-					,tr = _p.el.table.hover_column_getTr( path )
-					// index starts from 0
-					,index = $.inArray( td[0], tr.find('td') )
-				_p.el.table.hover_column_mouseenter( table, index )
+				if( e && e.originalEvent.path ){
+					var path = e.originalEvent.path
+						,td = $(this).on('mouseleave.tablehover-column', function(){
+								_p.el.table.hover_column_mouseleave( table, index )
+								td.off('mouseleave.tablehover-column')
+							})
+						,table = _p.el.table.hover_column_getTable( path )
+						,tr = _p.el.table.hover_column_getTr( path )
+						// index starts from 0
+						,index = $.inArray( td[0], tr.find('td') )
+					_p.el.table.hover_column_mouseenter( table, index )
+				}/*else{
+					var td = $(this).on('mouseleave.tablehover-column', function(){
+								_p.el.table.hover_column_mouseleave( table, index )
+								$(this).off('mouseleave.tablehover-column')
+							})
+						,table = _p.el.table.hover_column_getTable_alt( td )
+						,tr = _p.el.table.hover_column_getTr_alt( td )
+						// index starts from 0
+						,index = $.inArray( td[0], tr.find('td') )
+	
+					_p.el.table.hover_column_mouseenter( table, index )
+				}*/
 			})
 			_p.el.table.is_init = true
 		}
