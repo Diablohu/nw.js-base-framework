@@ -71,6 +71,7 @@ _menu.prototype.init = function(){
 				self.appendItem( menuitem )
 			}
 		}
+		this.dom.body.find('input[type="checkbox"]+label').addClass('checkbox')
 
 	// 虚化背景
 		if( this.settings.showBlured && _huCss.csscheck_full('backdrop-filter') ){
