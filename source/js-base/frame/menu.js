@@ -83,12 +83,12 @@ _menu.prototype.init = function(){
 	_frame.menu.menus.push(this)
 }
 
-_menu.prototype.show = function( targetEl, mouseX, mouseY ){
+_menu.prototype.show = function( targetEl, x, y ){
 	if( this.showing )
 		return this
 	
 	if( typeof targetEl == 'number' )
-		return this.show( 'mouse', targetEl, mouseX )
+		return this.show( 'mouse', targetEl, x )
 
 	var top, left, viewport_height, viewport_width, menu_height, menu_width
 	targetEl = targetEl || this.settings.target
@@ -109,11 +109,11 @@ _menu.prototype.show = function( targetEl, mouseX, mouseY ){
 	// 计算并设置位置
 		if( targetEl && targetEl instanceof jQuery ){
 			var offset 	= targetEl.offset()
-			top		= offset.top + targetEl.height() - $body.scrollTop()
-			left 	= offset.left - $body.scrollLeft()
-		}else if( targetEl == 'mouse' || (!targetEl && typeof mouseX == 'number') ){
-			left	= mouseX || 0
-			top 	= (mouseY + 5) || 0
+			top		= offset.top + targetEl.height() - $body.scrollTop() + (y || 0)
+			left 	= offset.left - $body.scrollLeft() + (x || 0)
+		}else if( targetEl == 'mouse' || (!targetEl && typeof x == 'number') ){
+			left	= x || 0
+			top 	= (y + 5) || 0
 		}
 				
 		viewport_height		= $window.height() - 10
