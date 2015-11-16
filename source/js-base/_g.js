@@ -923,7 +923,8 @@ _g.init=function(){
 		//	if( e.originalEvent.pointerType == 'touch' )
 		//		$body.trigger('touchend.preventMouseover')
 		//},
-		'mouseenter': function(){
+		//'mouseenter': function(){
+		'mouseover': function(){
 			//console.log('mouseenter')
 			/*
 			if( !$body_preventMouseover ){
