@@ -24,10 +24,10 @@ _p.tip = {
 
 	// 初始化tip
 	init_global: function(){
-		if(_p.tip.is_init)
+		if(this.is_init)
 			return false
 
-		_p.tip.dom = $('<div id="tip"/>')
+		this.dom = $('<div id="tip"/>')
 						//.on('transitionend', function(e){
 						.on('transitionend webkitTransitionEnd mozTransitionEnd', function(e){
 							if( e.currentTarget == e.target && e.originalEvent.propertyName == 'opacity' && _p.tip.dom.css('opacity') == 0 ){
@@ -47,22 +47,22 @@ _p.tip = {
 						})
 						.appendTo($body)
 
-		_p.tip.dom_body = $('<div class="body"/>').appendTo(_p.tip.dom)
+		this.dom_body = $('<div class="body"/>').appendTo(this.dom)
 
 		// 虚化背景
 			if( _huCss.csscheck_full('backdrop-filter') ){
-				_p.tip.dom.addClass('mod-blur-backdrop')
+				this.dom.addClass('mod-blur-backdrop')
 			}else if( typeof node != 'undefined' ){
-				_p.tip.dom.addClass('mod-blur-shot')
-				_p.tip.dom_bluredbg = $('<div/>').appendTo($('<div class="bluredbg"/>').appendTo(_p.tip.dom))
+				this.dom.addClass('mod-blur-shot')
+				this.dom_bluredbg = $('<div/>').appendTo($('<div class="bluredbg"/>').appendTo(this.dom))
 			}
 
 		// 注册ESC热键
 		//_frame.global.esc_register(function(){
-		//	_p.tip.hide(true)
+		//	this.hide(true)
 		//})
 
-		_p.tip.is_init=true
+		this.is_init=true
 	},
 
 	// 显示
@@ -75,27 +75,27 @@ _p.tip = {
 		if( $('body').data('preventMouseover') || !cont )
 			return false
 
-		clearTimeout(_p.tip.timeout_fade)
-		_p.tip.timeout_fade = null
+		clearTimeout(this.timeout_fade)
+		//this.timeout_fade = null
 
 		//if( el )
 		//	el.data('tip-indicator-pos-original', el.attr('data-tip-indicator-pos') || null)
 
 		el = el || 'body';
-		_p.tip.el = $(el)
+		this.el = $(el)
 
-		pos = pos || _p.tip.pos
+		pos = pos || this.pos
 
 		// tip已显示则不运行之后的函数
-		//if( _p.tip.is_showing )
+		//if( this.is_showing )
 			//return true
 
-		cont = _p.tip.content(cont)
+		cont = this.content(cont)
 
-		_p.tip.init_global();
+		this.init_global();
 
-		if( !_p.tip.dom.hasClass('show') ){
-			if( _p.tip.dom_bluredbg && typeof node != 'undefined' ){
+		if( !this.dom.hasClass('show') ){
+			if( this.dom_bluredbg && typeof node != 'undefined' ){
 				node.win.capturePage(function(datauri){
 					_p.tip.dom_bluredbg.css(
 						'background-image',
@@ -103,63 +103,63 @@ _p.tip = {
 					)
 				}, 'jpg', 'datauri')
 			}
-			_p.tip.dom.addClass('show')
+			this.dom.addClass('show')
 		}
 
-		_p.tip.position( cont, pos );
+		this.position( cont, pos );
 
-		_p.tip.is_showing=true;
+		this.is_showing=true;
 	},
 
 	// 计算tip位置
 	position:function(cont, pos){
 		var hashcode = cont.hashCode()
 
-		if( _p.tip.curContent != hashcode ){
-			_p.tip.dom.css({
+		if( this.curContent != hashcode ){
+			this.dom.css({
 					top:	'-1000px',
 					left:	'-1000px'
 				})
-			_p.tip.dom_body.html(cont)
-			_p.initDOM( _p.tip.dom_body )
+			this.dom_body.html(cont)
+			_p.initDOM( this.dom_body )
 			/*
-			_p.tip.dom.css({
+			this.dom.css({
 					top:	'-1000px',
 					left:	'-1000px'
 				}).html(cont)
-			_p.initDOM( _p.tip.dom )
+			_p.initDOM( this.dom )
 			*/
 
-			_p.tip.curContent = hashcode
+			this.curContent = hashcode
 		}
 
-		var coords = _p.tip['pos_'+pos]( _p.tip.dom.outerWidth() , _p.tip.dom.outerHeight() );
+		var coords = this['pos_'+pos]( this.dom.outerWidth() , this.dom.outerHeight() );
 		if(coords){
-			_p.tip.move(coords.x, coords.y)
+			this.move(coords.x, coords.y)
 		}
 	},
 
 	// 隐藏tip
 	// is_instant：瞬间隐藏，没有延迟
 	hide:function( is_instant ){
-		if( !_p.tip.is_init || !_p.tip.is_showing )
+		if( !this.is_init || !this.is_showing )
 			return false
 
-		//_p.tip.el_pending = null
+		//this.el_pending = null
 
-		_p.tip.timeout_fade = setTimeout(function(){
+		this.timeout_fade = setTimeout(function(){
 			_p.tip.el = null
 
 			_p.tip.dom.removeClass('on')
 
 			_p.tip.is_showing = false
 			_p.tip.curContent = null
-		}, is_instant ? 0 : _p.tip.countdown_fade)
+		}, is_instant ? 0 : this.countdown_fade)
 	},
 	
 	// 格式化tip内容
 	content: function( cont, el ){
-		el = el || _p.tip.el
+		el = el || this.el
 		//var contOriginal = cont
 
 		// 替换快捷键，如果存在acgdb-hotkey
@@ -173,7 +173,7 @@ _p.tip = {
 
 	// 移动tip到 x,y
 	move: function(x,y){
-		_p.tip.dom.css({
+		this.dom.css({
 			top:	y,
 			left:	x
 		}).addClass('on')
@@ -181,12 +181,12 @@ _p.tip = {
 
 	// 获取小箭头尺寸
 	get_indicator_size: function(){
-		return _p.tip.size_indicator * _g.baseMultiper;
+		return this.size_indicator * _g.baseMultiper;
 	},
 
 	// tip位置函数
 	pos_mouse: function(w,h){
-		_p.tip.el.unbind('mousemove.tooltip').bind('mousemove.tooltip',function(e){
+		this.el.unbind('mousemove.tooltip').bind('mousemove.tooltip',function(e){
 			var xOff=25
 				,yOff=30
 				,x=e.pageX+xOff
@@ -205,52 +205,52 @@ _p.tip = {
 		})
 	},
 	pos_bottom: function(w,h){
-		var el		= _p.tip.el
-			,dom	= _p.tip.dom
+		var el		= this.el
+			,dom	= this.dom
 			,offset	= el.offset()
 			,x		= offset.left + ( el.outerWidth() - dom.outerWidth() )/2
-			,y		= offset.top + el.outerHeight() + _p.tip.get_indicator_size()
+			,y		= offset.top + el.outerHeight() + this.get_indicator_size()
 
-		_p.tip.dom.attr('data-tip-indicator-pos', 'top' )
+		this.dom.attr('data-tip-indicator-pos', 'top' )
 
-		return _p.tip.checkpos(x,y,w,h)
+		return this.checkpos(x,y,w,h)
 	},
 	pos_top: function(w,h){
-		var el		= _p.tip.el
-			,dom	= _p.tip.dom
+		var el		= this.el
+			,dom	= this.dom
 			,offset	= el.offset()
 			,x		= offset.left + ( el.outerWidth() - dom.outerWidth() )/2
-			,y		= offset.top - h - _p.tip.get_indicator_size()
+			,y		= offset.top - h - this.get_indicator_size()
 
-		_p.tip.dom.attr('data-tip-indicator-pos', 'bottom' )
+		this.dom.attr('data-tip-indicator-pos', 'bottom' )
 
-		return _p.tip.checkpos(x,y,w,h)
+		return this.checkpos(x,y,w,h)
 	},
 	pos_left: function(w,h){
-		var el		= _p.tip.el
-			,dom	= _p.tip.dom
+		var el		= this.el
+			,dom	= this.dom
 			,offset	= el.offset()
-			,x		= offset.left - w - _p.tip.get_indicator_size()
+			,x		= offset.left - w - this.get_indicator_size()
 			,y		= offset.top + ( el.outerHeight() - dom.outerHeight() )/2
 
-		_p.tip.dom.attr('data-tip-indicator-pos', 'right' )
+		this.dom.attr('data-tip-indicator-pos', 'right' )
 
-		return _p.tip.checkpos(x,y,w,h)
+		return this.checkpos(x,y,w,h)
 	},
 	pos_right: function(w,h){
-		var el		= _p.tip.el
-			,dom	= _p.tip.dom
+		var el		= this.el
+			,dom	= this.dom
 			,offset	= el.offset()
-			,x		= offset.left + el.outerWidth() + _p.tip.get_indicator_size()
+			,x		= offset.left + el.outerWidth() + this.get_indicator_size()
 			,y		= offset.top + ( el.outerHeight() - dom.outerHeight() )/2
 
-		_p.tip.dom.attr('data-tip-indicator-pos', 'left' )
+		this.dom.attr('data-tip-indicator-pos', 'left' )
 
-		return _p.tip.checkpos(x,y,w,h)
+		return this.checkpos(x,y,w,h)
 	},
 	checkpos: function(x,y,w,h){
-		var el = _p.tip.el
-			,dom = _p.tip.dom
+		var el = this.el
+			,dom = this.dom
 			,offset = el.offset()
 			,nx = x
 			,ny = y
@@ -267,24 +267,24 @@ _p.tip = {
 				}
 			}else{
 				//nx = offset.left - w;
-				pos = _p.tip['pos_left']( w , h )
+				pos = this['pos_left']( w , h )
 			}
 		}
 
 		// 超出X轴左边界
 		else if (x < 0)
 			//nx = 15;
-			pos = _p.tip['pos_right']( w , h )
+			pos = this['pos_right']( w , h )
 
 		// 超出Y轴下边界
 		if ( (y + h) > ($(window).scrollTop() + $(window).height()) )
-			//ny = _p.tip.pos == 'bottom' ? ( offset.top - _p.tip.el.outerHeight() ) : ( $(window).scrollTop() + $(window).height() - h );
-			pos = _p.tip['pos_top']( w , h )
+			//ny = this.pos == 'bottom' ? ( offset.top - this.el.outerHeight() ) : ( $(window).scrollTop() + $(window).height() - h );
+			pos = this['pos_top']( w , h )
 
 			/*
 		// Node on top of viewport scroll
 		else if ((offset.top - 100) < $(window).scrollTop())
-			ny = offset.top + _p.tip.el.outerHeight();
+			ny = offset.top + this.el.outerHeight();
 
 		// Less than y viewport scrolled
 		else if (y < $(window).scrollTop())
@@ -296,8 +296,8 @@ _p.tip = {
 
 		// 超出Y轴上边界
 		else if ( y < $(window).scrollTop() )
-			//ny = _p.tip.pos == 'bottom' ? ( offset.top - _p.tip.el.outerHeight() ) : ( $(window).scrollTop() + $(window).height() - h );
-			pos = _p.tip['pos_bottom']( w , h )
+			//ny = this.pos == 'bottom' ? ( offset.top - this.el.outerHeight() ) : ( $(window).scrollTop() + $(window).height() - h );
+			pos = this['pos_bottom']( w , h )
 
 		dom.attr({
 			'data-tip-indicator-offset-x': (x - nx)+'px',
@@ -310,7 +310,7 @@ _p.tip = {
 		var cont 		= el.data('tip')
 
 		if( !el.data('tip-filtered') ){
-			_p.tip.filters.forEach(function(filter){
+			this.filters.forEach(function(filter){
 				cont = filter(cont) || cont
 			})
 			el.data({
@@ -319,11 +319,11 @@ _p.tip = {
 			})
 		}
 
-		//_p.tip.el_pending = el
+		//this.el_pending = el
 		
 		//setTimeout(function(){
-		//	if( _p.tip.el_pending == el )
-				_p.tip.show(
+		//	if( this.el_pending == el )
+				this.show(
 					cont,
 					el,
 					el.data('tip-position')
