@@ -896,36 +896,49 @@ _g.init=function(){
 		}*/
 	})
 
-	$body.data('preventMouseover', false).on({
+	$body/*.data('preventMouseover', false)*/.on({
 		'touchstart.preventMouseover': function(){
 			$body.removeClass('hover')
 			$body_preventMouseover = true
+			$body_isTouch = true
 			//$body_hover = false
 			//console.log('touchstart')
 		},
-		'touchend.preventMouseover': function(){
+		//'touchend.preventMouseover': function(){
 			// make touchend trigger after mouseleave
-			setTimeout(function(){
-				$body_preventMouseover = false
-				//console.log('touchend')
-			}, 1)
-		},
-		'pointerover': function(e){
+			//setTimeout(function(){
+			//	$body_preventMouseover = false
+			//	//console.log('touchend')
+			//}, 1)
+		//},
+		'pointerenter': function(e){
 			if( e.originalEvent.pointerType == 'touch' )
 				$body.trigger('touchstart.preventMouseover')
+			else{
+				$body_preventMouseover = false
+				$body_isTouch = false
+			}
 		},
-		'pointerleave': function(e){
-			if( e.originalEvent.pointerType == 'touch' )
-				$body.trigger('touchend.preventMouseover')
-		},
+		//'pointerleave': function(e){
+		//	if( e.originalEvent.pointerType == 'touch' )
+		//		$body.trigger('touchend.preventMouseover')
+		//},
 		'mouseenter': function(){
 			//console.log('mouseenter')
+			/*
 			if( !$body_preventMouseover ){
 				//if( !$body_hover ){
 					$body.addClass('hover')
 					//$body_hover = true
 				//}
 			}else{
+				$body_preventMouseover = false
+			}*/
+			if( $body_isTouch ){
+				$body_isTouch = false
+				$body_preventMouseover = true
+			}else{
+				$body.addClass('hover')
 				$body_preventMouseover = false
 			}
 		},

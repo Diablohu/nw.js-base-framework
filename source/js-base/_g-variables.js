@@ -12,6 +12,7 @@ var $window 	= $(window)
 	,$html 		= $('html')
 	,$body 		= $('body')
 		,$body_preventMouseover	= false
+		,$body_isTouch			= false
 		//,$body_hover 			= false
 
 
