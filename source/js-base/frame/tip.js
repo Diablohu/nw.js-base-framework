@@ -10,6 +10,7 @@ _p.tip = {
 	//dom:					null,
 	//el:						null,
 	//el_pending:			null,
+	// persist: 			false,
 	pos:					'bottom',
 	size_indicator:			8,
 	//timeout_fade:			null,
@@ -109,6 +110,7 @@ _p.tip = {
 		this.position( cont, pos );
 
 		this.is_showing=true;
+		this.persist = false
 	},
 
 	// 计算tip位置
@@ -142,7 +144,7 @@ _p.tip = {
 	// 隐藏tip
 	// is_instant：瞬间隐藏，没有延迟
 	hide:function( is_instant ){
-		if( !this.is_init || !this.is_showing )
+		if( !this.is_init || !this.is_showing || this.persist )
 			return false
 
 		//this.el_pending = null
