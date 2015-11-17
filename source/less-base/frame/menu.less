@@ -58,8 +58,30 @@ body > .menus{
 				.height(40);
 				padding:	0 1.5em 0 1.25em;
 				color:		#f2f2f2;
+				position: 	relative;
 				font-weight:lighter;
 				.transition-property(~"color, background-color");
+				&.mod-checkbox{
+					padding: 	0;
+					/*
+					input[type=checkbox]{
+						position: 	absolute;
+						top: 		50%;
+						line-height:0;
+						.left(12);
+					}
+					*/
+					label{
+						display: 	block;
+						padding-left: 40px;
+						padding-right: 1.5em;
+						&.checkbox{
+							&:before{
+								margin-left: 12px;
+							}
+						}
+					}
+				}
 			}
 			menuitem, .menuitem{
 				&:hover{
@@ -125,33 +147,6 @@ body > .menus{
 			background-attachment:	fixed;
 			.transition-property(transform);
 			transform:	translateY(10px);
-		}
-		
-		&.mod-checkbox{
-			&>.body{
-				menuitem{
-					position: 	relative;
-					padding: 	0;
-					/*
-					input[type=checkbox]{
-						position: 	absolute;
-						top: 		50%;
-						line-height:0;
-						.left(12);
-					}
-					*/
-					label{
-						display: 	block;
-						padding-left: 40px;
-						padding-right: 1.5em;
-						&.checkbox{
-							&:before{
-								margin-left: 12px;
-							}
-						}
-					}
-				}
-			}
 		}
 	}
 }

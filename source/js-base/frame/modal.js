@@ -17,6 +17,9 @@ _frame.modal = {
 
 		// 是否允许点击空白区域隐藏modal
 			//'blank_to_close': 	false
+		
+		// 隐藏/关闭时，使用 detach 而非 remove
+			// 'detach':	false
 	},
 
 	show: function(content, title, options, callback){
@@ -27,6 +30,9 @@ _frame.modal = {
 		this.showing = true
 
 		var settings = $.extend( {}, this.defaults, options );
+
+		if( settings.detach )
+			this.content = content
 
 		//this.dom.content.empty()
 		content.appendTo( this.dom.content )
@@ -106,6 +112,11 @@ _frame.modal = {
 	},
 
 	resetContent: function(){
+		if( this.content ){
+			this.content.detach()
+			this.content = null
+		}
+		
 		this.dom.content.empty()
 
 		this.dom.container.removeClass( this.dom.container.data('customclass') )
