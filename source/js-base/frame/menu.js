@@ -36,7 +36,7 @@ _menu.prototype.init = function(){
 										self.hide()
 									}, 10)
 							})
-							.appendTo(_frame.menu.dom.container)
+							//.appendTo(_frame.menu.dom.container)
 		this.dom.body 	= $('<div class="body"/>').appendTo(this.dom.menu)
 	
 	// 绑定transitionend事件，自动触发隐藏函数
@@ -97,7 +97,7 @@ _menu.prototype.show = function( targetEl, x, y ){
 	_frame.menu.timeout_hideall = null
 
 	// addClass: show
-		this.dom.menu.addClass('show')
+		this.dom.menu.appendTo(_frame.menu.dom.container).addClass('show')
 		_frame.menu.dom.container.addClass('on')
 	
 	// 设置状态
@@ -158,6 +158,7 @@ _menu.prototype.hideTrue = function(){
 				'top': 	'',
 				'left': ''
 			})
+			.detach()
 	
 	// 移除虚化背景DOM
 		if( this.dom.blured instanceof jQuery ){
