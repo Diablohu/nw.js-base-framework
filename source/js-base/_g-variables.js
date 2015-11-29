@@ -259,7 +259,8 @@ if( !_huCss.ver || _huCss.ver < 1.2 ){
 	// CSS Compatibility check
 	_huCss.csscheck = function(prop){
 		if( !_huCss.csscheck_div ){
-			_huCss.csscheck_div = document.createElement( "div" )
+			_huCss.csscheck_div = document.documentElement
+			//_huCss.csscheck_div = document.createElement( "div" )
 		}
 		if( prop in _huCss.csscheck_div.style ){
 			return true
