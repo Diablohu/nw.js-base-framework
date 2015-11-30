@@ -541,7 +541,7 @@ if(bIE6){
 
 // HTML标签添加兼容性Class
 if(bGecko){
-	$html.addClass('gecko')
+	$html.addClass('is-gecko')
 }else if(bIE11 && !bIE10){
 	$html.removeClass('ie9').addClass('ie11' + (bTouch ? ' ie-touch' : '' ))
 }else if(bIE10 && !bIE9){
