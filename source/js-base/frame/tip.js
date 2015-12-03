@@ -72,7 +72,7 @@ _p.tip = {
 	show: function( cont, el, pos ){
 		// 如果为非指针指向，不执行
 		// 无内容则不执行
-		if( $('body').data('preventMouseover') || !cont )
+		if( $('body').data('preventMouseover') || $body_preventMouseover || !cont )
 			return false
 
 		clearTimeout(this.timeout_fade)
