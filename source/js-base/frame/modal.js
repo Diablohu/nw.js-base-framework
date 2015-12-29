@@ -76,7 +76,9 @@ _frame.modal = {
 		//	this.dom.container.removeClass('mod-blur-backdrop mod-blur-shot')
 		//}
 
-		this.dom.container.addClass('on ' + settings.classname).data('customclass', settings.classname)
+		setTimeout(function(){
+			_frame.modal.dom.container.addClass('on ' + settings.classname).data('customclass', settings.classname)
+		}, 0)
 		_p.initDOM( this.dom.content )
 
 		this.dom.bg.off('click.blank_to_close').on('click.blank_to_close', function(){
