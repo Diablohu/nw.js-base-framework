@@ -91,28 +91,27 @@ body > .modal{
 		background: rgba(16, 16, 16, .25);
 	}
 
-	&.mod-blur-backdrop,
-	&.mod-blur-shot{
+	&.mod-blur-backdrop{
 		&>div{
-			background: 	transparent;
-		}
-		&>s{
-			background:		transparent;
-			//box-shadow: 	inset 0 0 50px 25px lighten(#000, 65%);
-			&:before{
-				z-index:	2;
-				content:	'';
-				background:	rgba(0,0,0,.35);
-			}
+			background:	@color_overlay_bg_mod_blur3;
 		}
 	}
 
 	&.mod-blur-shot{
 		&>s{
+			background:		transparent;
 			box-shadow: inset 0 0 50px 25px hsl(0, 0%, 40%);
+			&:before{
+				z-index:	2;
+				content:	'';
+				background:	@color_overlay_bg_mod_blur2;
+			}
 			&>img{
 				-webkit-filter:	~"blur(10px)";
 			}
+		}
+		&>div{
+			background: 	transparent;
 		}
 	}
 	/*

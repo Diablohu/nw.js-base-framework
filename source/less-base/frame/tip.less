@@ -68,7 +68,12 @@
 	}
 	*/
 
-	&.mod-blur-backdrop,
+	&.mod-blur-backdrop{
+		background:		transparent;
+		&>.body{
+			background:	@color_overlay_bg_mod_blur3;
+		}
+	}
 	&.mod-blur-shot{
 		background:		@color_overlay_bg_mod_blur;
 		&>.body{
