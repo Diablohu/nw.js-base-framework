@@ -55,7 +55,7 @@ if( global.launcherOptions ){
 
 
 // 文件另存为
-	_g.file_save_as = function( path_src, filename ){
+	_g.file_save_as = function( path_src, filename, callback ){
 		path_src = node.path.normalize(path_src)
 		if( !_frame.dom.hidden_saveform )
 			_frame.dom.hidden_saveform = $('<input type="file" nwsaveas/>')
@@ -81,7 +81,7 @@ if( global.launcherOptions ){
 							rd.pipe(wr);
 							function done(err) {
 								if (!cbCalled) {
-									//callback(err, src, dest);
+									callback(err, path_src, dest);
 									cbCalled = true;
 								}
 							}

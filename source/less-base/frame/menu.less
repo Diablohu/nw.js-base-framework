@@ -29,6 +29,7 @@ body > .menus{
 		max-height:		100%;
 		transform:		translateY(-10px);
 		.border(1, solid, rgba(255, 255, 255, .3));
+		color:			#f2f2f2;
 
 		&>.body{
 			position:	relative;
@@ -37,6 +38,8 @@ body > .menus{
 			max-height:	100%;
 			overflow:	auto;
 			-webkit-overflow-scrolling: touch;
+			font-weight:lighter;
+			line-height:40px;
 			/*
 			&:before{
 				z-index:	100;
@@ -54,12 +57,10 @@ body > .menus{
 			*/
 			menuitem, .menuitem, .item{
 				display:	block;
-				.line-height(40);
+				//.line-height(40);
 				.height(40);
 				padding:	0 1.5em 0 1.25em;
-				color:		#f2f2f2;
 				position: 	relative;
-				font-weight:lighter;
 				.transition-property(~"color, background-color");
 				&.mod-checkbox{
 					padding: 	0;
@@ -104,6 +105,7 @@ body > .menus{
 				border: 	0 solid transparent;
 				.border-top(1, solid, rgba(255,255,255,.2));
 				margin: 	8px 0;
+				clear: 		both;
 			}
 		}
 
