@@ -20,6 +20,9 @@ _frame.modal = {
 		
 		// 隐藏/关闭时，使用 detach 而非 remove
 			// 'detach':	false
+		
+		// 关闭时运行的函数
+			// 'onClose': 	function(){}
 	},
 
 	show: function(content, title, options, callback){
@@ -36,6 +39,9 @@ _frame.modal = {
 
 		//this.dom.content.empty()
 		content.appendTo( this.dom.content )
+		
+		if( settings.onClose )
+			_frame.modal.dom.container.on('close', settings.onClose)
 
 		//this.dom.container.removeClass( this.dom.container.data('customclass') )
 
@@ -153,6 +159,7 @@ _frame.modal.init = function(){
 													_frame.modal.dom.container.removeClass('show')
 														//.off('transitionend.modal_hide')
 													_frame.modal.showing = false
+													_frame.modal.dom.container.trigger('close').off('close')
 												}, 10)
 											}
 										}
