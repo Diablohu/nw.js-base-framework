@@ -91,12 +91,6 @@ body > .modal{
 		background: rgba(16, 16, 16, .25);
 	}
 
-	&.mod-blur-backdrop{
-		&>div{
-			background:	@color_overlay_bg_mod_blur3;
-		}
-	}
-
 	&.mod-blur-shot{
 		&>s{
 			background:		transparent;
@@ -147,13 +141,20 @@ body > .modal{
 			//-webkit-filter:	~"blur(2px)";
 			.user-select(none);
 		}
-		&.mod-blur-backdrop{
-			backdrop-filter: 	~"blur(7.5px)";
-		}
 	}
 	&.show{
 		display:	block !important;
 		will-change:opacity;
+	}
+
+
+	@supports (backdrop-filter: blur(7.5px)){
+		&>div{
+			background:	@color_overlay_bg_mod_blur3;
+		}
+		&.on{
+			backdrop-filter: 	~"blur(7.5px)";
+		}
 	}
 
 

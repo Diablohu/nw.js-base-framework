@@ -109,13 +109,6 @@ body > .menus{
 			}
 		}
 
-		&.mod-blur-backdrop{
-			background:		transparent;
-			&>.body{
-				background:	@color_overlay_bg_mod_blur3;
-				border-color: rgba(255, 255, 255, .2);
-			}
-		}
 		&.mod-blur-shot{
 			background:		@color_overlay_bg_mod_blur;
 			&>.body{
@@ -129,7 +122,15 @@ body > .menus{
 			&>.blured{
 				transform:	translateY(0);
 			}
-			&.mod-blur-backdrop{
+		}
+		
+		@supports (backdrop-filter: blur(7.5px)){
+			background:		transparent;
+			&>.body{
+				background:	@color_overlay_bg_mod_blur3;
+				border-color: rgba(255, 255, 255, .2);
+			}
+			&.on{
 				backdrop-filter: 	~"blur(7.5px)";
 			}
 		}

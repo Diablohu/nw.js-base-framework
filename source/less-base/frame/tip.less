@@ -68,24 +68,26 @@
 	}
 	*/
 
-	&.mod-blur-backdrop{
-		background:		transparent;
-		&>.body{
-			background:	@color_overlay_bg_mod_blur3;
-		}
-	}
+
 	&.mod-blur-shot{
 		background:		@color_overlay_bg_mod_blur;
 		&>.body{
 			background:	@color_overlay_bg_mod_blur2;
 		}
 	}
+	
+	@supports (backdrop-filter: blur(7.5px)){
+		background:		transparent;
+		&>.body{
+			background:	@color_overlay_bg_mod_blur3;
+		}
+		&.on{
+			backdrop-filter: 	~"blur(7.5px)";
+		}
+	}
 
 	&.on{
 		opacity:	1;
-		&.mod-blur-backdrop{
-			backdrop-filter: 	~"blur(7.5px)";
-		}
 	}
 	&.show{
 		display:	block;

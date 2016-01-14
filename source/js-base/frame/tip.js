@@ -50,9 +50,7 @@ _p.tip = {
 		this.dom_body = $('<div class="body"/>').appendTo(this.dom)
 
 		// 虚化背景
-			if( _huCss.csscheck_full('backdrop-filter') ){
-				this.dom.addClass('mod-blur-backdrop')
-			}else if( typeof node != 'undefined' ){
+			if( typeof node != 'undefined' ){
 				this.dom.addClass('mod-blur-shot')
 				this.dom_bluredbg = $('<div/>').appendTo($('<div class="bluredbg"/>').appendTo(this.dom))
 			}

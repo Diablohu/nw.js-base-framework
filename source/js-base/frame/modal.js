@@ -64,9 +64,7 @@ _frame.modal = {
 		})
 
 		if( settings.showBlured ){
-			if( _huCss.csscheck_full('backdrop-filter') ){
-				this.dom.container.addClass('mod-blur-backdrop')
-			}else if( !this.dom.blured && typeof node != 'undefined' ){
+			if( !this.dom.blured && typeof node != 'undefined' ){
 				node.win.capturePage(function(datauri){
 					//_frame.modal.dom.blured = $('<img/>').attr('src', datauri).appendTo(_frame.modal.dom.container)
 					//_frame.modal.dom.blured = $('<s/>').css('background-image', 'url('+datauri+')').appendTo(_frame.modal.dom.container)
@@ -79,7 +77,7 @@ _frame.modal = {
 				this.dom.container.addClass('mod-blur-shot')
 			}
 		}//else{
-		//	this.dom.container.removeClass('mod-blur-backdrop mod-blur-shot')
+		//	this.dom.container.removeClass('mod-blur-shot')
 		//}
 
 		setTimeout(function(){
@@ -115,7 +113,7 @@ _frame.modal = {
 				this.dom.blured.remove()
 				this.dom.blured = null
 			}
-			this.dom.container.removeClass('mod-blur-backdrop mod-blur-shot')
+			this.dom.container.removeClass('mod-blur-shot')
 		}
 	},
 

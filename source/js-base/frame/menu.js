@@ -17,9 +17,7 @@ _menu.prototype.defaults = {
 	// 目标元素，如果存在，会根据该元素计算菜单呼出位置
 		'target': 		null,
 	// 追加样式
-		'className': 	null,
-	// 显示虚化背景
-		'showBlured':	true
+		'className': 	null
 }
 
 _menu.prototype.init = function(){
@@ -74,9 +72,7 @@ _menu.prototype.init = function(){
 		this.dom.body.find('input[type="checkbox"]+label').addClass('checkbox')
 
 	// 虚化背景
-		if( this.settings.showBlured && _huCss.csscheck_full('backdrop-filter') ){
-			this.dom.menu.addClass('mod-blur-backdrop')
-		}else if( this.settings.showBlured && typeof node != 'undefined' ){
+		if( typeof node != 'undefined' ){
 			this.dom.menu.addClass('mod-blur-shot')
 		}
 
@@ -133,7 +129,7 @@ _menu.prototype.show = function( targetEl, x, y ){
 		})
 
 	// 虚化背景
-		if( this.settings.showBlured && typeof node != 'undefined' ){
+		if( typeof node != 'undefined' ){
 			node.win.capturePage(this.capturePage_callback.bind(this), 'jpg', 'datauri')
 		}else{
 			this.dom.menu.addClass('on')
