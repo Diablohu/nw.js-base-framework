@@ -1,11 +1,41 @@
+// https://github.com/nwjs/nw.js/blob/nw13/src/resources/nw_pre13_shim.js
+(function() {
+
+  // detect `nw` object of NW13
+  if (!(self.nw && self.nw.require)) return;
+
+  var realrequire = nw.require;
+  self.require = function() {
+    if (arguments[0] === 'nw.gui') {
+      return nw;
+    } else {
+      return realrequire.apply(self, [].slice.call(arguments, 0));
+    }
+  };
+  self.require.cache = realrequire.cache;
+  self.require.extensions = realrequire.extensions;
+  self.require.resolve = realrequire.resolve;
+
+  // Following items exist when running with `--mixed-context`.
+  // Copy them from `nw` to browser context
+  if (!self.process) self.process = self.nw.process;
+  if (!self.Buffer) self.Buffer = self.nw.Buffer;
+  if (!self.global) self.global = self.nw.global;
+  if (!self.root) self.root = self.nw.root;
+
+}());
+
 // define and require node.js libraries & modules
 var node = {
 	'require': 	function(module, only_require){
-		if( !node[module] && !only_require ){
+        /*var r = typeof nw != 'undefined' && nw.require
+                    ? nw.require
+                    : require
+                    */
+		if( !node[module] && !only_require )
 			node[module] = require(module)
-		}if( only_require ){
+        if( only_require )
 			return require(module)
-		}
 		return node[module]
 	}
 }
