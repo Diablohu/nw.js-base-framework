@@ -211,8 +211,9 @@ _frame.menu = {
 					'click': function(e, ms){
 						_menu.hideAll(ms)
 					},
-					'contextmenu': function(){
+					'contextmenu': function(e){
 						_frame.menu.dom.container.trigger('click')
+						e.preventDefault()
 					}/*,
 					'mousemove': function(){
 						if( !_frame.menu.timeout_hideall )
