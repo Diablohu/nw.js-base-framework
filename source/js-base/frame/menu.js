@@ -86,7 +86,6 @@ _menu.prototype.show = function( targetEl, x, y ){
 	if( typeof targetEl == 'number' )
 		return this.show( 'mouse', targetEl, x )
 
-	var top, left, viewport_height, viewport_width, menu_height, menu_width
 	targetEl = targetEl || this.settings.target
 
 	clearTimeout(_frame.menu.timeout_hideall)
@@ -103,30 +102,7 @@ _menu.prototype.show = function( targetEl, x, y ){
 		this.dom.body.children().trigger('show')
 
 	// 计算并设置位置
-		if( targetEl && targetEl instanceof jQuery ){
-			var offset 	= targetEl.offset()
-			top		= offset.top + targetEl.height() - $body.scrollTop() + (y || 0)
-			left 	= offset.left - $body.scrollLeft() + (x || 0)
-		}else if( targetEl == 'mouse' || (!targetEl && typeof x == 'number') ){
-			left	= x || 0
-			top 	= (y + 5) || 0
-		}
-				
-		viewport_height		= $window.height() - 10
-		viewport_width		= $window.width() - 10
-			
-		menu_height			= this.dom.menu.outerHeight()
-		menu_width			= this.dom.menu.outerWidth()
-
-		this.dom.menu.css({
-			'top': 		top + menu_height > viewport_height
-							? viewport_height - menu_height
-							: top,
-			//'left': 	offset.left - $body.scrollLeft()
-			'left': 	left + menu_width > viewport_width
-							? viewport_width - menu_width
-							: left
-		})
+		this.position( targetEl, x, y )
 
 	// 虚化背景
 		if( typeof node != 'undefined' ){
@@ -136,9 +112,12 @@ _menu.prototype.show = function( targetEl, x, y ){
 		}
 }
 
-_menu.prototype.hide = function(){
+_menu.prototype.hide = function( callback_hide ){
 	if( !this.showing )
 		return false
+	
+	if( callback_hide )
+		this.callback_hide = callback_hide
 
 	if( !this.dom.menu.hasClass('on') )
 		this.hideTrue()
@@ -165,6 +144,48 @@ _menu.prototype.hideTrue = function(){
 	// 重置状态
 		this.showing = false
 		_frame.menu.dom.container.removeClass('on')
+	
+	if( this.callback_hide )
+		this.callback_hide()
+	
+	delete( this.callback_hide )
+}
+
+_menu.prototype.position = function( targetEl, x, y ){
+	var top, left, viewport_height, viewport_width, menu_height, menu_width
+	
+	targetEl = targetEl || this.settings.target
+
+	this.dom.menu
+		.css({
+			'top': 	'',
+			'left': ''
+		})
+
+	if( targetEl && targetEl instanceof jQuery ){
+		var offset 	= targetEl.offset()
+		top		= offset.top + targetEl.height() - $body.scrollTop() + (y || 0)
+		left 	= offset.left - $body.scrollLeft() + (x || 0)
+	}else if( targetEl == 'mouse' || (!targetEl && typeof x == 'number') ){
+		left	= x || 0
+		top 	= (y + 5) || 0
+	}
+
+	viewport_height		= $window.height() - 10
+	viewport_width		= $window.width() - 10
+
+	menu_height			= this.dom.menu.outerHeight()
+	menu_width			= this.dom.menu.outerWidth()
+
+	this.dom.menu.css({
+		'top': 		top + menu_height > viewport_height
+						? viewport_height - menu_height
+						: top,
+		//'left': 	offset.left - $body.scrollLeft()
+		'left': 	left + menu_width > viewport_width
+						? viewport_width - menu_width
+						: left
+	})
 }
 
 _menu.prototype.appendItem = function(item){
