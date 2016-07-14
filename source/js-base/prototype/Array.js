@@ -26,7 +26,7 @@ Object.defineProperty(Array.prototype, 'mergeFrom', {
 	value: function( arr2 ){
 		Array.prototype.push.apply(
 			this,
-			(arr2 instanceof Array) ? arr2 : [arr2]
+			(arr2 instanceof Array || arr2.push) ? arr2 : [arr2]
 		)
 		return this
 	}
