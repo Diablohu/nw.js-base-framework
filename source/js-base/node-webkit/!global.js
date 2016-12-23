@@ -74,21 +74,45 @@ if (global.launcherOptions) {
 // 	}catch(e){
 // 		_g.root	= node.path.join( node.gui.App.dataPath, '/Extracted Data/')
 // 	}
-_g.root = node.path.dirname(process.execPath)
-try {
-    node.fs.accessSync(
-        node.path.join(_g.root, 'package.json'),
-        node.fs.F_OK
-    );
-} catch (e) {
-    _g.root = process.cwd()
+// _g.root = node.path.dirname(process.execPath)
+// try {
+//     node.fs.accessSync(
+//         node.path.join(_g.root, 'package.json'),
+//         node.fs.F_OK
+//     );
+// } catch (e) {
+//     _g.root = process.cwd()
+//     try {
+//         node.fs.accessSync(
+//             node.path.join(_g.root, 'package.json'),
+//             node.fs.F_OK
+//         );
+//     } catch (e) {
+//         _g.root = node.path.join(node.gui.App.dataPath, '/Extracted Data/')
+//     }
+// }
+_g.rootscheck = [
+    node.path.dirname(process.execPath),
+    process.cwd(),
+    node.path.join(node.gui.App.dataPath, '/Extracted Data/')
+]
+_g.rootscheckentry = node.gui.App.manifest.main
+_g.rootscheckentry = _g.rootscheckentry.split('://')
+_g.rootscheckentry = _g.rootscheckentry[_g.rootscheckentry.length - 1]
+for(var i=0; i<_g.rootscheck.length; i++){
+    var dir = _g.rootscheck[i]
+    var hasMain = true
     try {
         node.fs.accessSync(
-            node.path.join(_g.root, 'package.json'),
+            node.path.join(dir, 'app', 'main.html'),
             node.fs.F_OK
         );
     } catch (e) {
-        _g.root = node.path.join(node.gui.App.dataPath, '/Extracted Data/')
+        hasMain = false
+    }
+    if (hasMain){
+        _g.root = dir
+        continue
     }
 }
 
