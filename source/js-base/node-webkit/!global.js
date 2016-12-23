@@ -70,7 +70,11 @@ if( global.launcherOptions ){
 	// 对app根目录再做检查，如果不存在，则指向到缓存目录
 	// 该情况通常发生于使用launcer启动时
 		try{
-			var stat = node.fs.lstatSync( node.path.join( _g.root , '/app/main.html' ) )
+			// var stat = node.fs.lstatSync( node.path.join( _g.root , '/app/main.html' ) )
+        	node.fs.accessSync(
+				node.path.join(_g.root, 'package.json'),
+				node.fs.F_OK
+			);
 		}catch(e){
 			_g.root	= node.path.join( node.gui.App.dataPath, '/Extracted Data/')
 		}
