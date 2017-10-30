@@ -1,8 +1,15 @@
 // https://github.com/nwjs/nw.js/blob/nw13/src/resources/nw_pre13_shim.js
 (function () {
 
+    // console.log(
+    //     top.nw,
+    //     self.nw
+    // )
+
+    if (self !== top && top.nw && top.nw.require) self.nw = top.nw
+
     // detect `nw` object of NW13
-    if (!(self.nw && self.nw.require)) return;
+    if (!(self.nw && self.nw.require)) return
 
     var realrequire = nw.require;
     self.require = function () {
@@ -23,7 +30,7 @@
     if (!self.global) self.global = self.nw.global;
     if (!self.root) self.root = self.nw.root;
 
-} ());
+}());
 
 // define and require node.js libraries & modules
 var node = {
@@ -32,9 +39,11 @@ var node = {
                     ? nw.require
                     : require
                     */
-        if (!node[module] && !only_require)
+        if (!node[module] && !only_require) {
             node[module] = require(module)
-        if (only_require)
+            if (typeof self[module] === 'undefined')
+                self[module] = node[module]
+        } if (only_require)
             return require(module)
         return node[module]
     }
@@ -42,11 +51,17 @@ var node = {
 
 
 node.gui = node.require('nw.gui', true)
-node.win = node.gui.Window.get()
+// node.win = node.gui.Window.get()
 node.clipboard = node.gui.Clipboard.get();
 
 node.require('path')
 node.require('fs')
+
+if (typeof launcherOptions === 'undefined')
+    self.launcherOptions = {
+        window: {}
+    }
+node.win = node.win || self.win || (typeof nw !== 'undefined' ? nw.Window.get() : undefined) || node.gui.Window.get()
 
 
 if (typeof debugmode == 'undefined')
@@ -56,8 +71,8 @@ if (typeof debugmode == 'undefined')
             || node.gui.App.manifest['window']['debug']
         )
 
-if (global.launcherOptions) {
-    debugmode = global.launcherOptions['debug'] || global.launcherOptions['window']['debug']
+if (global && launcherOptions && launcherOptions.window && typeof launcherOptions['window']['debug'] !== 'undefined') {
+    debugmode = launcherOptions['debug'] || launcherOptions['window']['debug']
 }
 
 
@@ -99,18 +114,18 @@ _g.rootscheck = [
 _g.rootscheckentry = node.gui.App.manifest.main
 _g.rootscheckentry = _g.rootscheckentry.split('://')
 _g.rootscheckentry = _g.rootscheckentry[_g.rootscheckentry.length - 1]
-for(var i=0; i<_g.rootscheck.length; i++){
+for (var i = 0; i < _g.rootscheck.length; i++) {
     var dir = _g.rootscheck[i]
-    var hasMain = true
-    try {
-        node.fs.accessSync(
-            node.path.join(dir, 'app', 'main.html'),
-            node.fs.F_OK
-        );
-    } catch (e) {
-        hasMain = false
-    }
-    if (hasMain){
+    // var hasMain = true
+    // try {
+    //     node.fs.accessSync(
+    //         node.path.join(dir, 'app', 'main.html'),
+    //         node.fs.F_OK
+    //     );
+    // } catch (e) {
+    //     hasMain = false
+    // }
+    if (!_g.root && node.fs.existsSync(node.path.join(dir, 'app', 'main.html'))) {
         _g.root = dir
         continue
     }

@@ -100,7 +100,10 @@ _p.tip = {
 						'background-image',
 						'url('+datauri+')'
 					)
-				}, 'jpg', 'datauri')
+				}, {
+					format: 'jpg',
+					datatype: 'datauri'
+				})
 			}
 			this.dom.addClass('show')
 		}

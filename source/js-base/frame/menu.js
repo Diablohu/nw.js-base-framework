@@ -106,7 +106,10 @@ _menu.prototype.show = function( targetEl, x, y ){
 
 	// 虚化背景
 		if( typeof node != 'undefined' ){
-			node.win.capturePage(this.capturePage_callback.bind(this), 'jpg', 'datauri')
+			node.win.capturePage(this.capturePage_callback.bind(this), {
+				format: 'jpg',
+				datatype: 'datauri'
+			})
 		}else{
 			this.dom.menu.addClass('on')
 		}

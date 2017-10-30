@@ -1,47 +1,55 @@
 var _config = {
-	getFullKeyname: function( key ){
-		return 'config_' + key
-	},
+    getFullKeyname: function (key) {
+        return 'config_' + key
+    },
 
-	get: function( key ){
-		if( !localStorage )
-			return false
+    get: function (key) {
+        if (!localStorage)
+            return false
 
-		var value = localStorage[ _config.getFullKeyname(key) ]
+        key = _config.getFullKeyname(key)
 
-		if( value === 'true' )
-			return true
+        var value = Lockr.get(key)
+        // var value = localStorage[_config.getFullKeyname(key)]
 
-		if( value === 'undefined' ){
-			delete localStorage[ _config.getFullKeyname(key) ]
-			return null
-		}
+        if (value === 'true')
+            return true
 
-		return value
-	},
+        if (value === 'undefined') {
+            Lockr.rm(key)
+            // delete localStorage[_config.getFullKeyname(key)]
+            return null
+        }
 
-	set: function( key, value ){
-		if( !localStorage )
-			return false
+        return value
+    },
 
-		if( value === null && localStorage[ _config.getFullKeyname(key) ] ){
-			delete localStorage[ _config.getFullKeyname(key) ]
-		}else{
-			localStorage[ _config.getFullKeyname(key) ] = value
-		}
-	}
+    set: function (key, value) {
+        if (!localStorage)
+            return false
+
+        key = _config.getFullKeyname(key)
+
+        if (value === null && Lockr.get(key)) {
+            // delete localStorage[_config.getFullKeyname(key)]
+            Lockr.rm(key)
+        } else {
+            Lockr.set(key, value)
+            // localStorage[_config.getFullKeyname(key)] = value
+        }
+    }
 }
 
 
 
 
 _frame.app_config = {
-	//is_init: false,
+    //is_init: false,
 
-	init: function(){
-		if( _frame.app_config.is_init )
-			return true
+    init: function () {
+        if (_frame.app_config.is_init)
+            return true
 
-		_frame.app_config.is_init = true
-	}
+        _frame.app_config.is_init = true
+    }
 }

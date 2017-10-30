@@ -73,7 +73,10 @@ _frame.modal = {
 												.appendTo(_frame.modal.dom.container)*/
 					_frame.modal.dom.blured = $('<img/>').attr('src', datauri)
 												.appendTo( _frame.modal.dom.bg )
-				}, 'jpg', 'datauri')
+				}, {
+					format: 'jpg',
+					datatype: 'datauri'
+				})
 				this.dom.container.addClass('mod-blur-shot')
 			}
 		}//else{
