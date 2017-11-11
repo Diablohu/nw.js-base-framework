@@ -55,11 +55,17 @@ body > .menus{
 							inset 0 0 10px rgba(255, 255, 255, .5);
 			}
 			*/
-			menuitem, .menuitem, .item{
+			menuitem,
+			.menuitem,
+			.item,
+			.title,
+			.subtitle{
 				display:	block;
 				//.line-height(40);
-				.height(40);
-				padding:	0 1.5em 0 1.25em;
+				.min-height(40);
+				padding:	0;
+				.padding-left(18);
+				.padding-right(22);
 				position: 	relative;
 				.transition-property(~"color, background-color");
 				&.mod-checkbox{
@@ -82,6 +88,13 @@ body > .menus{
 							}
 						}
 					}
+				}
+				.sup{
+					display: 	block;
+					line-height:1em;
+					.font-size(12);
+					.padding-top(10);
+					.margin-bottom(-10);
 				}
 			}
 			menuitem, .menuitem{
@@ -106,6 +119,19 @@ body > .menus{
 				.border-top(1, solid, rgba(255,255,255,.2));
 				margin: 	8px 0;
 				clear: 		both;
+			}
+
+			.title{
+				font-weight:600;
+				font-size:  1.2em;
+			}
+
+			.subtitle{
+				.margin-top(-5);
+				.margin-bottom(-10);
+				& + .title{
+					.margin-top(-20);
+				}
 			}
 		}
 
